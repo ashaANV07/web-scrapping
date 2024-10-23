@@ -1,0 +1,53 @@
+{
+  "clientCode": "MM399",
+  "clientName": {
+    "firstName": "DIXIT JOSHI",
+    "lastName": "DIXIT JOSHI"
+  },
+  "dob": "11/11/1997",
+  "gender": "M",
+  "occupation": "01",
+  "primaryHolderPAN": "BHEPJ3238D",
+  "holdingNature": "SI",
+  "secondHolder": {
+    "firstName": "",
+    "lastName": "",
+    "dob": "",
+    "pan": ""
+  },
+  "thirdHolder": {
+    "firstName": "",
+    "lastName": "",
+    "dob": "",
+    "pan": ""
+  },
+  "guardian": {
+    "firstName": "",
+    "lastName": "",
+    "dob": "",
+    "pan": ""
+  },
+  "bankAccounts": [
+    {
+      "accountType": "SB",
+      "accountNo": "",
+      "ifscCode": "Yes",
+      "micrNo": "",
+      "isDefault": "N"
+    },
+    {
+      "accountType": "SB",
+      "accountNo": "",
+      "ifscCode": "Yes",
+      "micrNo": "",
+      "isDefault": "N"
+    },
+    {
+      "accountType": "SB",
+      "accountNo": "",
+      "ifscCode": "Yes",
+      "micrNo": "",
+      "isDefault": "N"
+    }
+  ]
+}
