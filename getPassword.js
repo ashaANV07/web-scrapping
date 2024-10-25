@@ -44,4 +44,3 @@ const getPassword = async () => {
 };
 
 getPassword();
-// module.exports = getPassword;
