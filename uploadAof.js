@@ -92,7 +92,7 @@ async function uploadFile(base64Tiff, password) {
         <soap:Body>
             <tem:UploadFile>
                 <tem:data>
-                    <bses:ClientCode>A0001</bses:ClientCode>
+                    <bses:ClientCode>ucc0002</bses:ClientCode>
                     <bses:DocumentType>NRM</bses:DocumentType>
                     <bses:EncryptedPassword>${password}</bses:EncryptedPassword>
                     <bses:FileName>AOF_6405_a0001.tiff</bses:FileName>
