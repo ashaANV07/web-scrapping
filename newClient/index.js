@@ -33,176 +33,216 @@
 // }
 
 // registerUCC();
-
 const axios = require("axios");
 
-const buildParamString = ({
-  ucc,
-  firstName,
-  middleName = "",
-  lastName,
-  taxStatus,
-  gender,
-  dob,
-  occupationCode,
-  holdingNature,
-  panExempt = "N",
-  primaryPAN,
-  secondHolderFirstName = "",
-  secondHolderMiddleName = "",
-  secondHolderLastName = "",
-  thirdHolderFirstName = "",
-  thirdHolderMiddleName = "",
-  thirdHolderLastName = "",
-  accountType1,
-  accountNo1,
-  ifscCode1,
-  defaultBankFlag1 = "Y",
-  nomineeName = "",
-  nomineeRelation = "22",
-  nomineePercentage = "100",
-  nomineeMinorFlag = "N",
-  nomineeDOB = "",
-  nomineeGuardian = "",
-  communicationMode = "P",
-  email = "",
-  phone = "",
-  address1 = "",
-  address2 = "",
-  address3 = "",
-  city = "",
-  state = "",
-  pincode = "",
-  country = "INDIA",
-  kycType = "K",
-  ckycNumber = "",
-  aadhaarUpdated = "N",
-}) => {
-  return `${ucc}|${firstName}|${middleName}|${lastName}|${taxStatus}|${gender}|${dob}|${occupationCode}|${holdingNature}|${secondHolderFirstName}|${secondHolderMiddleName}|${secondHolderLastName}|${thirdHolderFirstName}|${thirdHolderMiddleName}|${thirdHolderLastName}|${panExempt}|${primaryPAN}|||||${accountType1}|${accountNo1}||${ifscCode1}|${defaultBankFlag1}|${phone}|||||||||||||${firstName}${lastName}|${taxStatus}|${address1}|${address2}|${address3}|${city}|${state}|${pincode}|${country}|${phone}||||${email}|${communicationMode}||||||||||||${phone}|${nomineeName}|${nomineeRelation}|${nomineePercentage}|${nomineeMinorFlag}|${nomineeDOB}|${nomineeGuardian}|||||||||||||${kycType}|${ckycNumber}|||N||P|||SE|SE|${aadhaarUpdated}|O||||||||||||||||||`;
-};
+function constructParam(data) {
+  return [
+    data.ClientCode || "ucc0010",
+    data.FirstName || "FirstName",
+    data.MiddleName || "",
+    data.LastName || "LastName",
+    data.TaxStatus || "01",
+    data.Gender || "M",
+    data.DOB || "01/01/1980",
+    data.OccupationCode || "01",
+    data.HoldingNature || "SI",
+    data.secondHolderFirstName || "",
+    data.secondHolderMiddleName || "",
+    data.secondHolderLastName || "",
+    data.thirdHolderFirstName || "",
+    data.thirdHolderMiddleName || "",
+    data.thirdHolderLastName || "",
+    data.secondHolderDOB || "",
+    data.thirdHolderDOB || "",
+    data.guardianFirstName || "",
+    data.guardianMiddleName || "",
+    data.guardianLastName || "",
+    data.guardianDOB || "",
+    data.primaryHolderPanExempt || "N",
+    data.secondHolderPanExempt || "",
+    data.thirdHolderPanExempt || "",
+    data.guardianPanExempt || "",
+    data.primaryHolderPAN || "AFEPK2130F",
+    data.secondHolderPAN || "",
+    data.thirdHolderPAN || "",
+    data.guardianPAN || "",
+    data.primaryHolderPanExemptCategory || "",
+    data.secondHolderPanExemptCategory || "",
+    data.thirdHolderPanExemptCategory || "",
+    data.guardianPanExemptCategory || "",
+    data.ClientType || "P",
+    data.PMSFlag || "",
+    data.DefaultDP || "",
+    data.cdslDpID || "",
+    data.cdslCLTID || "",
+    data.CMBPid || "",
+    data.NSDLDPID || "",
+    data.NSDLCLTID || "",
+    data.accType1 || "SB",
+    data.accNo1 || "11415",
+    data.MICRNo1 || "",
+    data.IFSCCode1 || "HDFC0000001",
+    data.DefaultBankFlag1 || "Y",
+    data.accType2 || "",
+    data.accNo2 || "",
+    data.MICRNo2 || "",
+    data.IFSCCode2 || "",
+    data.DefaultBankFlag2 || "",
+    data.accType3 || "",
+    data.accNo3 || "",
+    data.MICRNo3 || "",
+    data.IFSCCode3 || "",
+    data.DefaultBankFlag3 || "",
+    data.accType4 || "",
+    data.accNo4 || "",
+    data.MICRNo4 || "",
+    data.IFSCCode4 || "",
+    data.DefaultBankFlag4 || "",
+    data.accType5 || "",
+    data.accNo5 || "",
+    data.MICRNo5 || "",
+    data.IFSCCode5 || "",
+    data.DefaultBankFlag5 || "",
+    data.ChequeName || "FirstNameLastName",
+    data.DividendPaymode || "01",
+    data.Address1 || "ADD1",
+    data.Address2 || "ADD2",
+    data.Address3 || "ADD3",
+    data.City || "MUMBAI",
+    data.StateCode || "MA",
+    data.PostalCode || "400001",
+    data.Country || "INDIA",
+    data.ResiPhone || "22721233",
+    data.ResiFax || "",
+    data.OfficePhone || "",
+    data.OfficeFax || "",
+    data.Email || "test@test.com",
+    data.CommunicationMode || "P",
+    data.ForeignAddress1 || "",
+    data.ForeignAddress2 || "",
+    data.ForeignAddress3 || "",
+    data.ForeignCity || "",
+    data.ForeignPinCode || "",
+    data.ForeignState || "",
+    data.ForeignCountry || "",
+    data.ForeignPhone || "",
+    data.ForeignFax || "",
+    data.ForeignOfficePhone || "",
+    data.ForeignOfficeFax || "",
+    data.IndianMobileNo || "9999999999",
+    data.Nominee1Name || "NomineeName1",
+    data.Nominee1Relation || "01",
+    data.Nominee1Applicable || "100",
+    data.Nominee1MinorFlag || "N",
+    data.Nominee1DOB || "",
+    data.Nominee1guardianFlag || "",
+    data.Nominee2Name || "",
+    data.Nominee2Relation || "",
+    data.Nominee2Applicable || "",
+    data.Nominee2MinorFlag || "",
+    data.Nominee2DOB || "",
+    data.Nominee2guardianFlag || "",
+    data.Nominee3Name || "",
+    data.Nominee3Relation || "",
+    data.Nominee3Applicable || "",
+    data.Nominee3MinorFlag || "",
+    data.Nominee3DOB || "",
+    data.Nominee3guardianFlag || "",
+    data.primaryHolderKycType || "K", // Provide valid KYC type here (C for CKYC, P for PAN, etc.)
+    data.primaryHolderCkycNumber || "", // Example CKYC Number (Mandatory if KYC Type is CKYC)
+    data.secondHolderKycType || "",
+    data.secondHolderCkycNumber || "",
+    data.thirdHolderKycType || "",
+    data.thirdHolderCkycNumber || "",
+    data.guardianKycType || "",
+    data.guardianCkycNumber || "",
+    data.primaryHolderKraExemptRefNo || "",
+    data.secondHolderKraExemptRefNo || "",
+    data.thirdHolderKraExemptRefNo || "",
+    data.guardianKraExemptRefNo || "",
+    data.AadhaarUpdated || "N",
+    data.MapinId || "",
+    data.PaperlessFlag || "P",
+    data.LEINo || "",
+    data.LEIValidity || "",
+    data.Filter1 || "SE",
+    data.Filter2 || "SE",
+    data.NominationOpt || "Y",
+    data.NominationAuthMode || "O",
+    data.Nominee1Pan || "",
+    data.Nominee1GuardianPan || "",
+    data.Nominee2Pan || "",
+    data.Nominee2GuardianPan || "",
+    data.Nominee3Pan || "",
+    data.Nominee3GuardianPan || "",
+    data.secondHolderEmail || "",
+    data.secondHolderEmailDeclaration || "", // Mobile Declaration (Self-Declared)
+    data.secondHolderMobileNo || "",
+    data.secondHolderMobileNoDeclaration || "", // Mobile Declaration (Self-Declared)
+    data.thirdHolderEmail || "",
+    data.thirdHolderEmailDeclaration || "",
+    data.thirdHolderMobileNo || "",
+    data.thirdHolderMobileNoDeclaration || "", // Mobile Declaration (Self-Declared)
+    data.guardianRelation || "",
+    data.filler1 || "",
+    data.filler2 || "",
+    data.filler3 || "",
+  ].join("|");
+}
 
-const requestData = ({
-  ucc,
-  firstName,
-  middleName,
-  lastName,
-  taxStatus,
-  gender,
-  dob,
-  occupationCode,
-  holdingNature,
-  primaryPAN,
-  secondHolderFirstName,
-  secondHolderMiddleName,
-  secondHolderLastName,
-  thirdHolderFirstName,
-  thirdHolderMiddleName,
-  thirdHolderLastName,
-  accountType1,
-  accountNo1,
-  ifscCode1,
-  email,
-  phone,
-  address1,
-  city,
-  state,
-  pincode,
-  country,
-  kycType,
-  ckycNumber,
-  aadhaarUpdated,
-}) => ({
-  UserId: "640501",
-  MemberCode: "6405",
-  Password: "Abc@12345",
-  RegnType: "NEW",
-  Param: buildParamString({
-    ucc,
-    firstName,
-    middleName,
-    lastName,
-    taxStatus,
-    gender,
-    dob,
-    occupationCode,
-    holdingNature,
-    primaryPAN,
-    secondHolderFirstName,
-    secondHolderMiddleName,
-    secondHolderLastName,
-    thirdHolderFirstName,
-    thirdHolderMiddleName,
-    thirdHolderLastName,
-    accountType1,
-    accountNo1,
-    ifscCode1,
-    email,
-    phone,
-    address1,
-    city,
-    state,
-    pincode,
-    country,
-    kycType,
-    ckycNumber,
-    aadhaarUpdated,
-  }),
-  Filler1: "",
-  Filler2: "",
-});
-
-const apiURL =
-  "https://bsestarmfdemo.bseindia.com/BSEMFWEBAPI/UCCAPI/UCCRegistration";
-
-async function registerUCC(userInput) {
-  const data = requestData(userInput);
-
-  console.log("Generated Param string:", data.Param);
+// Function to integrate UCC Registration API
+async function registerUCC(data) {
+  const apiUrl =
+    "https://bsestarmfdemo.bseindia.com/BSEMFWEBAPI/UCCAPI/UCCRegistration";
 
   try {
-    const response = await axios.post(apiURL, data, {
+    const paramString = constructParam(data); // Construct the Param string
+
+    const payload = {
+      UserId: "640501", // Use your actual UserId
+      MemberCode: "6405", // Use your actual MemberCode
+      Password: "Abc@12345", // Use your actual password
+      RegnType: data.RegnType || "NEW", // Example: "NEW" for new registration
+      Param: paramString, // Pass dynamic Param string
+      Filler1: data.Filler1 || "",
+      Filler2: data.Filler2 || "",
+    };
+
+    console.log("Constructed Param String:", payload.Param); // Check the Param string
+
+    const response = await axios.post(apiUrl, payload, {
       headers: {
         "Content-Type": "application/json",
       },
     });
-    console.log("Response:", response.data);
+
+    console.log("Response:", response.data); // Log the API response
   } catch (error) {
-    if (error.response) {
-      console.error("Error Response Data:", error.response.data);
-    } else {
-      console.error("Error:", error.message);
-    }
+    console.error(
+      "Error:",
+      error.response ? error.response.data : error.message
+    );
   }
 }
 
-registerUCC({
-  ucc: "ucc0002",
-  firstName: "Asha",
-  middleName: "",
-  lastName: "Chaudhari",
-  taxStatus: "01",
-  gender: "F",
-  dob: "01/01/1980",
-  occupationCode: "01",
-  holdingNature: "SI",
-  primaryPAN: "ABCDE1234F",
-  secondHolderFirstName: "",
-  secondHolderMiddleName: "",
-  secondHolderLastName: "",
-  thirdHolderFirstName: "",
-  thirdHolderMiddleName: "",
-  thirdHolderLastName: "",
-  accountType1: "SB",
-  accountNo1: "1141500001",
-  ifscCode1: "HDFC0000001",
-  email: "john.doe@test.com",
-  phone: "9999999999",
-  address1: "123 Main St",
-  city: "Mumbai",
-  state: "MA",
-  pincode: "400001",
-  country: "INDIA",
-  kycType: "K",
-  ckycNumber: "",
-  aadhaarUpdated: "Y",
-});
+// Sample Data (Dummy)
+const requestData = {
+  ClientCode: "ucc0010",
+  FirstName: "FirstName",
+  MiddleName: "",
+  LastName: "LastName",
+  TaxStatus: "01",
+  Gender: "M",
+  DOB: "01/01/1980",
+  OccupationCode: "01",
+  HoldingNature: "SI",
+  Email: "test@test.com",
+  CommunicationMode: "P",
+  IndianMobileNo: "9999999999",
+//   primaryHolderKycType: "C", // KYC Type is required (C for CKYC, P for PAN, etc.)
+//   primaryHolderCkycNumber: "123456789012", // Example CKYC Number
+  Filler1: "",
+  Filler2: "",
+};
+
+registerUCC(requestData);
