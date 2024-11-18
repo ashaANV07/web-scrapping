@@ -36,11 +36,15 @@ async function getPassword() {
     console.log("Raw response data:", data);
 
     if (data.includes("<getPasswordResult>")) {
-      const password = data
+      // Extract the entire getPasswordResult content
+      const result = data
         .split("<getPasswordResult>")[1]
         .split("</getPasswordResult>")[0];
-      console.log("Extracted Password:", password);
-      return password;
+
+      // Extract the part after "100|"
+      const encryptedPassword = result.split("|")[1];
+      console.log("Extracted Password:", encryptedPassword);
+      return encryptedPassword;
     } else {
       throw new Error("getPasswordResult tag not found in response.");
     }

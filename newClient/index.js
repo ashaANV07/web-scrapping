@@ -148,8 +148,8 @@ function constructParam(data) {
     data.Nominee3MinorFlag || "",
     data.Nominee3DOB || "",
     data.Nominee3guardianFlag || "",
-    data.primaryHolderKycType || "K", // Provide valid KYC type here (C for CKYC, P for PAN, etc.)
-    data.primaryHolderCkycNumber || "", // Example CKYC Number (Mandatory if KYC Type is CKYC)
+    data.primaryHolderKycType || "K",
+    data.primaryHolderCkycNumber || "", 
     data.secondHolderKycType || "",
     data.secondHolderCkycNumber || "",
     data.thirdHolderKycType || "",
@@ -176,13 +176,13 @@ function constructParam(data) {
     data.Nominee3Pan || "",
     data.Nominee3GuardianPan || "",
     data.secondHolderEmail || "",
-    data.secondHolderEmailDeclaration || "", // Mobile Declaration (Self-Declared)
+    data.secondHolderEmailDeclaration || "",
     data.secondHolderMobileNo || "",
-    data.secondHolderMobileNoDeclaration || "", // Mobile Declaration (Self-Declared)
+    data.secondHolderMobileNoDeclaration || "", 
     data.thirdHolderEmail || "",
     data.thirdHolderEmailDeclaration || "",
     data.thirdHolderMobileNo || "",
-    data.thirdHolderMobileNoDeclaration || "", // Mobile Declaration (Self-Declared)
+    data.thirdHolderMobileNoDeclaration || "", 
     data.guardianRelation || "",
     data.filler1 || "",
     data.filler2 || "",
@@ -190,25 +190,24 @@ function constructParam(data) {
   ].join("|");
 }
 
-// Function to integrate UCC Registration API
 async function registerUCC(data) {
   const apiUrl =
     "https://bsestarmfdemo.bseindia.com/BSEMFWEBAPI/UCCAPI/UCCRegistration";
 
   try {
-    const paramString = constructParam(data); // Construct the Param string
+    const paramString = constructParam(data); 
 
     const payload = {
-      UserId: "640501", // Use your actual UserId
-      MemberCode: "6405", // Use your actual MemberCode
-      Password: "Abc@12345", // Use your actual password
-      RegnType: data.RegnType || "NEW", // Example: "NEW" for new registration
-      Param: paramString, // Pass dynamic Param string
+      UserId: "640501", 
+      MemberCode: "6405", 
+      Password: "Abc@12345", 
+      RegnType: data.RegnType || "NEW", 
+      Param: paramString, 
       Filler1: data.Filler1 || "",
       Filler2: data.Filler2 || "",
     };
 
-    console.log("Constructed Param String:", payload.Param); // Check the Param string
+    console.log("Constructed Param String:", payload.Param); 
 
     const response = await axios.post(apiUrl, payload, {
       headers: {
@@ -216,7 +215,7 @@ async function registerUCC(data) {
       },
     });
 
-    console.log("Response:", response.data); // Log the API response
+    console.log("Response:", response.data); 
   } catch (error) {
     console.error(
       "Error:",
@@ -225,7 +224,6 @@ async function registerUCC(data) {
   }
 }
 
-// Sample Data (Dummy)
 const requestData = {
   ClientCode: "ucc0010",
   FirstName: "FirstName",

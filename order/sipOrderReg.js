@@ -4,19 +4,6 @@ async function registerSIP() {
   const url =
     "https://bsestarmfdemo.bseindia.com/StarMFAPI/api/XSIP/XSIPRegistration";
 
-  // const GoalType = {
-  //   "Kids Marriage": "01",
-  //   "Retirement Planning": "02",
-  //   "Kids Education": "03",
-  //   "Tax Savings": "04",
-  //   "Dream House": "05",
-  //   "Dream Car": "06",
-  //   "Dream Vacation": "07",
-  //   Others: "08",
-  // };
-
-  // const selectedGoalType = GoalType[goal] || GoalType["Others"];
-
   const requestBody = {
     LoginId: "640501",
     MemberCode: "6405",

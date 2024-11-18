@@ -30,7 +30,7 @@ const fetchData = async () => {
         "view-state":
           "c7dde67a3b2054223db0f4c98f3be02e05644c5985ad78f6b0cba10c84025bed2093f7473194e6d2d9f469cc2d02e1c3",
         Cookie:
-          "_ga=GA1.2.321505837.1728303634; _gid=GA1.2.365791434.1728303634; d_ux=9518bc3d3054bbfef5cadb723a55ac681b2c0a288cd5e36b445450b3f21fa125; _hjSessionUser_2459651=eyJpZCI6IjNkZjZmMDE5LTk5OWUtNWQ3ZC1iYjg4LTM2N2UyYmMxYjk3NCIsImNyZWF0ZWQiOjE3MjgzMDM2MzMxNTEsImV4aXN0aW5nIjp0cnVlfQ==; _hjSession_2459651=eyJpZCI6IjdiODIwNTdjLWExYmMtNDYxNS04YTFiLWYzOGJhNTk0OGY1MSIsImMiOjE3MjgzODYyNDY4NjYsInMiOjAsInIiOjAsInNiIjowLCJzciI6MCwic2UiOjAsImZzIjowLCJzcCI6MH0=; _ga_GF0GQSBRYP=GS1.2.1728386413.4.1.1728387547.0.0.0; _gat=1; c_ux=1800000; connect.sid=s%3A102305-1-SVNPtZVpf8N6Q941gHG4GCSCu1xheMjO.PhBFRl6tuLL3fFCYO0OMddrdffJP7%2FaAPFgydyfQ0SE; _ga_5JJ5GXPC1S=GS1.2.1728386246.7.1.1728388535.0.0.0",
+          "_ga=GA1.2.321505837.1728303634; d_ux=9518bc3d3054bbfef5cadb723a55ac681b2c0a288cd5e36b445450b3f21fa125; _hjSessionUser_2459651=eyJpZCI6IjNkZjZmMDE5LTk5OWUtNWQ3ZC1iYjg4LTM2N2UyYmMxYjk3NCIsImNyZWF0ZWQiOjE3MjgzMDM2MzMxNTEsImV4aXN0aW5nIjp0cnVlfQ==; _gid=GA1.2.1125750289.1731308214; _ga_GF0GQSBRYP=GS1.2.1731578143.25.1.1731578146.0.0.0; _gat=1; c_ux=1800000; connect.sid=s%3A102305-1-2wnzEqFE7KeDamAYILX9s1EUOIyyufCS.XOLRpGJGTYSZtAuNhEM3eV9h0IW7yMBuju3TRVrcJDg; _ga_5JJ5GXPC1S=GS1.2.1731578147.69.1.1731578355.0.0.0",
       },
       data: {
         filters: [{ schemeNameLike: null, aumGreaterEqual: null }],
@@ -49,9 +49,9 @@ const fetchData = async () => {
     const csv = json2csvParser.parse(data);
 
     // Save CSV to file
-    fs.writeFileSync("data.csv", csv);
+    fs.writeFileSync("asha.csv", csv);
 
-    console.log("Data saved to data.csv");
+    console.log("Data saved to data.csv", data);
   } catch (error) {
     console.error(
       "Error fetching data:",

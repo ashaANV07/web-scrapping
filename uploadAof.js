@@ -8,19 +8,17 @@ const path = require("path");
 async function pdfToBase64Tiff(pdfPath) {
   try {
     const outputDir = path.join(__dirname, "output");
-    fs.mkdirSync(outputDir, { recursive: true }); // Create output directory if not exists
+    fs.mkdirSync(outputDir, { recursive: true });
 
-    // Convert PDF pages to PNG images
     const options = {
       format: "png",
       out_dir: outputDir,
       out_prefix: path.basename(pdfPath, path.extname(pdfPath)),
-      page: null, // Convert all pages
+      page: null,
     };
 
     await pdf.convert(pdfPath, options);
 
-    // Read all the generated PNG files
     const imageFiles = fs
       .readdirSync(outputDir)
       .filter((file) => file.endsWith(".png"));
@@ -92,7 +90,7 @@ async function uploadFile(base64Tiff, password) {
         <soap:Body>
             <tem:UploadFile>
                 <tem:data>
-                    <bses:ClientCode>ucc0002</bses:ClientCode>
+                    <bses:ClientCode>ucc0010</bses:ClientCode>
                     <bses:DocumentType>NRM</bses:DocumentType>
                     <bses:EncryptedPassword>${password}</bses:EncryptedPassword>
                     <bses:FileName>AOF_6405_a0001.tiff</bses:FileName>

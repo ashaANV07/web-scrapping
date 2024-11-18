@@ -1,0 +1,25 @@
+
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head><title>
+	Mutual Fund System - Bombay Stock Exchange Limited
+</title></head>
+<body>
+    <form method="post" action="./ErrorPage.aspx?aspxerrorpath=%2fAOFDownload.aspx" id="form1">
+<div class="aspNetHidden">
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="oMJWg1Ucu9+nZ7u2ohPdk8W/Hy0SLl0xI5goTM7ANys7OvBVkpsMlJEViOTo8aaOcRPSJSLBPzg/SIe+ZeMy8J7b/0B0DVBZUfnHlEI94QPDydmht6bTm115LMvWrDlTNnk4qETnN0Jh9JjOStvOjhbNhIFLq9uPGhenYGAXYH1M8R+281CyCHPdj3m/xz4FcR36j3+gjs816p8A74qF3SPjKtQlh4RbadprZZcbtEfT0otBAHTk5SFfhTBVkhgcBrmqXA==" />
+</div>
+
+<div class="aspNetHidden">
+
+	<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5ED29197" />
+	<input type="hidden" name="__VIEWSTATEENCRYPTED" id="__VIEWSTATEENCRYPTED" value="" />
+</div>
+        <div style="width: 100%; text-align: center;">
+            <h2>
+                <span id="lblMsg" style="color:#0099CC;">Sorry !!! Some error occured during process, please try again or contact application admin</span></h2>
+        </div>
+    </form>
+</body>
+</html>
