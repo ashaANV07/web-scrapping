@@ -531,7 +531,6 @@ async function uploadFatca(data) {
     AADHAAR_RP: "N",
     NEW_CHANGE: "C",
     LOG_NAME: "N",
-    // Add any other fields as necessary...
   };
 
   try {

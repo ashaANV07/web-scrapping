@@ -71,7 +71,7 @@ function parseSOAPResponse(xml) {
 
 // Main function to execute the upload
 function main() {
-  const pdfPath = "./AOF_6405_a0001.tiff"; 
+  const pdfPath = "./AOF_6405_a0001.tiff";
   const pdfBase64 = pdfToBase64(pdfPath);
 //   console.log("pdfBase64", pdfBase64);
 

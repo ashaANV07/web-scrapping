@@ -3,7 +3,7 @@ const axios = require("axios");
 const registerNewClient = async () => {
   try {
     const url =
-      "https://bsestarmfdemo.bseindia.com/StarMFCommonAPI/ClientMaster/Registration";
+      "https://bsestarmfdemo.bseindia.com/BSEMFWEBAPI/UCCAPI/UCCRegistration";
 
     // // Mandatory Fields
     // const clientCode = "A0031";
@@ -132,12 +132,13 @@ const registerNewClient = async () => {
     // ].join("|");
     // console.log('first', param)
 
-    const param = "T0001|FirstName||LastName|01|M|01/01/1970|01|SI|||||||||||||N||||AFEPK2130F||||||||P||||||||SB|11415||HDFC0000001|Y|||||||||||||||||||||FirstName LastName|01|ADD 1|ADD 2|ADD 3|MUMBAI|MA|400001|INDIA|22721233||||test@test.com|P||||||||||||9999999999|||||||||||||||||||K||||||||||||N||P|||SE|SE|";
+    const param =
+      "A0666|BHARGAVIBEN|BHARGAVIBEN|PATEL|01|F|11/01/1994|06|SI|||||||||||||N||||CYVPP0404J||||||||D|N|CDSL|12071700|00113162|||||||||SB|442702010021817||UBIN0544272|N|SB|50100275796812||HDFC0001249|N|SB|36526015334||SBIN0071208|Y|||||||02|1668, PATEL SOCIETY|||NAVSARI|GU|396475|INDIA|8780171841||||ashiichaudhary07@gmail.com|E||||||||||||9898890296|RAKESH NANUBHAI PATEL| |100|N|||||||||||||||K||||||||||||||Z|||SE|SE|Y|O||||||||||||||";
 
     const data = {
       UserId: "640501",
       MemberCode: "6405",
-      Password: "Abc@12345",
+      Password: "Abc@0707",
       RegnType: "NEW",
       Param: param,
       Filler1: "",

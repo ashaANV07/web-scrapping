@@ -11,7 +11,7 @@ const xml = `<soap:Envelope xmlns:soap="http://www.w3.org/2003/05/soap-envelope"
                 <ns:getPassword>
                   <ns:UserId>640501</ns:UserId>
                   <ns:MemberId>6405</ns:MemberId>
-                  <ns:Password>Abc@12345</ns:Password>
+                  <ns:Password>Abc@0707</ns:Password>
                   <ns:PassKey>Abcd@123</ns:PassKey>
                 </ns:getPassword>
               </soap:Body>
