@@ -1,8 +1,6 @@
 const axios = require("axios");
-const moment = require("moment");
 
-// Helper function for DP details
-async function dpDetails(clientCode = "A1795") {
+async function dpDetails(clientCode = "MM399") {
   try {
     const currentYear = new Date().getFullYear();
     const nextYear = currentYear + 1;
@@ -12,10 +10,10 @@ async function dpDetails(clientCode = "A1795") {
     const techResponse = await axios.get(urlKyc);
     const result = techResponse.data[0];
     const data1 = result.DATA;
-    console.log('data1', data1)
+    console.log("data1", data1);
 
     const boId = data1[0][134];
-    console.log('boId', boId)
+    console.log("boId", boId);
     const dpId = data1[0][137];
     const fullGuardianName = data1[0][122].split(" ");
 
@@ -102,8 +100,7 @@ async function dpDetails(clientCode = "A1795") {
   }
 }
 
-// Helper function for bank details
-async function bankDetails(clientCode = "A1795") {
+async function bankDetails(clientCode = "MM399") {
   try {
     const currentYear = new Date().getFullYear();
     const urlKyc = `http://192.168.102.101:8080/techexcelapi/index.cfm/ClientBankDetailMultiple/ClientBankDetailMultiple1?&Client_id=${clientCode}&UrlUserName=techapi&UrlPassword=techapi@123&UrlDatabase=capsfo&UrlDataYear=${currentYear}`;
@@ -166,8 +163,7 @@ async function bankDetails(clientCode = "A1795") {
   }
 }
 
-// Main function for user creation schema
-async function userCreationSchema(clientCode = "A1795") {
+async function userCreationSchema(clientCode = "MM399") {
   try {
     const currentYear = new Date().getFullYear();
     const clientListUrl = `http://192.168.102.101:8080/techexcelapi/index.cfm/ClientList/ClientList?&CLIENT_ID=${clientCode.toUpperCase()}&FROM_DATE=&TO_DATE=&UrlUserName=techapi&UrlPassword=techapi@123&UrlDatabase=capsfo&UrlDataYear=${currentYear}`;
@@ -176,17 +172,14 @@ async function userCreationSchema(clientCode = "A1795") {
     const result = techResponse.data[0];
     const data = result.DATA;
 
-    // Client Name Processing
     const clientName = data[0][569].split(" ");
     const clientFirstName = clientName[0];
     const clientMiddleName = clientName[0];
     const clientLastName = clientName[clientName.length - 1];
 
-    // Basic Details
     const taxStatus = "01";
     const gender = data[0][34];
 
-    // Date Processing
     const dateOfIncorp = data[0][179];
     let DOB = dateOfIncorp ? dateOfIncorp : data[0][241];
     const EmailId = data[0][178];
@@ -208,7 +201,6 @@ async function userCreationSchema(clientCode = "A1795") {
     const dpData = await dpDetails(clientCode);
     const bankDict = await bankDetails(clientCode);
 
-    // Process Bank Details
     const getBankDetails = (bankDict, index) => {
       try {
         return {
@@ -229,37 +221,30 @@ async function userCreationSchema(clientCode = "A1795") {
       }
     };
 
-    // Get bank details for all accounts
     const bank1 = getBankDetails(bankDict, 1);
-    console.log('bank1', bank1)
+    console.log("bank1", bank1);
     const bank2 = getBankDetails(bankDict, 2);
     const bank3 = getBankDetails(bankDict, 3);
     const bank4 = getBankDetails(bankDict, 4);
     const bank5 = getBankDetails(bankDict, 5);
 
-    // Address Processing
     const residentialAddress = `${data[0][9]}${data[0][10]}${data[0][11]}`; // Removed spaces
     const addressParts = residentialAddress.split(", ");
 
     let addressline1 = "";
     let addressline2 = "";
 
-    // Loop through address parts
     addressParts.forEach((part) => {
       if (addressline1.length + part.length + 2 <= 40) {
-        // Add 2 for comma and space
         addressline1 += part + ", ";
       } else if (addressline2.length + part.length + 2 <= 40) {
         addressline2 += part + ", ";
       }
     });
 
-    // Remove trailing commas and spaces
     addressline1 = addressline1.trim().replace(/,$/, "");
     addressline2 = addressline2.trim().replace(/,$/, "");
 
-    // Build the final payload string
-    // Note: This is a simplified version. You'll need to add all the fields as per your requirements
     const finalPayload = [
       clientCode,
       clientFirstName,
@@ -291,7 +276,7 @@ async function userCreationSchema(clientCode = "A1795") {
       dpData.secondHolderPANExempt,
       dpData.thirdHolderPANExempt,
       dpData.guardianPANExempt,
-      data[0][189], // Primary Holder PAN
+      data[0][189],
       dpData.secondHolderPAN,
       dpData.thirdHolderPAN,
       dpData.guardianPAN,
